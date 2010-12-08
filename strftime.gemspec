@@ -16,18 +16,21 @@ Gem::Specification.new do |s|
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
   s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   s.require_paths = ["lib"]
-  
+
+  s.add_development_dependency('rspec')
+
   s.post_install_message = %{
   Thanks for installing strftime. You can use these methods to
   better understand the formats used in Date and Time strftime
-  
-  Strftime::Directives       #=> a full hash of directives
-  Strftime::Directives['%y'] #=> a hash of description and 
-                             #   optional example value
-                             
-  Strftime::Directives['y']  #=> optionally exclude the %
-   
-  strfd                      #=> shorthand to get directives
-  strfd('y')                 #=> shorthand to get details
+
+  Strftime::Directive.all                #=> a full array of directives
+  Strftime::Directive['%y']              #=> a Strftime::Directive with
+                                         #   a key of the given argument
+
+  Strftime::Directive.default_collection #=> standard directives
+                                         #   unchanged by your code
+
+  strfd                                  #=> shorthand to get directives
+  strfd('%y')                            #=> shorthand to get details
   }
 end
