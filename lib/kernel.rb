@@ -1,4 +1,3 @@
-#require 'strftime/directive'
 module Kernel
   def strfdirective(arg=nil)
     return Strftime::Directive.all if arg == 'all'
