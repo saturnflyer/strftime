@@ -2,6 +2,23 @@
 
 require File.expand_path(File.dirname(__FILE__) + '/../lib/strftime.rb')
 
-STDOUT.puts Strftime::Directive.all.sort
+given_date = ARGV[0]
 
-# TODO: parse sample date and return directives
+if given_date
+  test_date = given_date.dup
+  test_date.gsub!(/\d{4}/,'%Y')
+  possible_instructions = []
+  two_digit_directives = Strftime::Directive.all.select{|d| d.example.match(/^\d{2}$/)}
+  test_date.scan(/\d\d/).each do |found|
+    two_digit_directives.each do |directive|
+      possible_instructions << test_date.sub(Regexp.new(found),directive.key)
+    end
+  end
+  
+  possible_instructions.map!{|i| %{#{i} #=> #{Time.now.strftime(i)}}}
+  
+  STDOUT.puts possible_instructions.join('
+')
+else
+  STDOUT.puts Strftime::Directive.all.sort
+end

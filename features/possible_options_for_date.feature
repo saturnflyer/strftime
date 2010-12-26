@@ -9,3 +9,8 @@ Feature: using the command line
       And the output should contain "Saturday"
       And the output should contain "English day of the week"
       And the exit status should be 0
+    
+    Scenario: Displaying possible directives
+      When I run "strfd 'February 18, 2007'"
+      Then the output should contain "%B %d, %Y"
+      And the exit status should be 0
