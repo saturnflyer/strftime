@@ -16,6 +16,10 @@ module Strftime
     def <=>(directive)
       key <=> directive.key
     end
+    def to_s
+%{    #{key}  #=> #{example}
+        #{description}}
+    end
     class << self
       attr_reader :all
       attr_writer :all

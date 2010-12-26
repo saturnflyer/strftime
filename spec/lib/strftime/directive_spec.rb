@@ -54,4 +54,11 @@ describe Strftime::Directive do
       (a <=> b).should == -1
     end
   end
+  context '#to_s' do
+    it 'should output formatted contents' do
+      c = Strftime::Directive.new('%c', :description => 'Test sample.', :example => 'output something!')
+      c.to_s.should == '    %c  #=> output something!
+        Test sample.'
+    end
+  end
 end
