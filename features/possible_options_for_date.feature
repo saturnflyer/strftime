@@ -10,7 +10,15 @@ Feature: using the command line
       And the output should contain "English day of the week"
       And the exit status should be 0
     
-    Scenario: Displaying possible directives
+    Scenario: Displaying complex directives
       When I run "strfd 'February 18, 2007'"
       Then the output should contain "%B %d, %Y"
       And the exit status should be 0
+      
+    Scenario: Four digit year directive
+      When I run "strfd '2010'"
+      Then the output should contain "%Y"
+      
+    Scenario: Time zone offset directive
+      When I run "strfd '+0000'"
+      Then the output should contain "%z"
