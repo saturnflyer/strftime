@@ -4,6 +4,7 @@ module Strftime
     attr_accessor :description
     attr_accessor :example
     attr_accessor :matcher
+    attr_accessor :related
 
     @all = []
 
