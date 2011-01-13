@@ -1,6 +1,13 @@
 require 'spec_helper'
 
 describe Strftime::Directive do
+  context '.matching' do
+    it 'should return all Directives that match the given string' do
+      Strftime::Directive.all = Strftime::Directive.default_collection
+      debugger
+      Strftime::Directive.matching('+1234').length.should == 1
+    end
+  end
   context '.initialize' do
     it 'should require a key' do
       lambda{ Strftime::Directive.new }.should raise_error
@@ -16,6 +23,10 @@ describe Strftime::Directive do
     it 'should set the example from the given :example' do
       d = Strftime::Directive.new('%C', :example => 'some format display')
       d.example.should == 'some format display'
+    end
+    it "should set the matcher to a regular expression which matches it's replaceable text" do
+      d = Strftime::Directive.new('%D', :matcher => /ZOMG/)
+      d.matcher.should == /ZOMG/
     end
   end
   context '.all=' do

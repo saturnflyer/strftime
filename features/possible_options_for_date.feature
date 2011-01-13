@@ -22,3 +22,26 @@ Feature: using the command line
     Scenario: Time zone offset directive
       When I run "strfd '+0000'"
       Then the output should contain "%z"
+      
+    Scenario: Two digit directive
+      When I run "strfd '10'"
+      Then the output should contain "%g"
+      And the output should contain "%S"
+      And the output should contain "%H"
+      And the output should contain "%I"
+      And the output should contain "%U"
+      And the output should contain "%V"
+      And the output should contain "%k"
+      And the output should contain "%W"
+      And the output should contain "%m"
+      And the output should contain "%M"
+      And the output should contain "%C"
+      And the output should contain "%y"
+      And the output should contain "%d"
+      
+    Scenario: One digit directive
+      When I run "strfd '3'"
+      Then the output should contain "%e"
+      Then the output should contain "%l"
+      Then the output should contain "%u"
+      Then the output should contain "%w"

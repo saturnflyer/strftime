@@ -18,7 +18,7 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
 
   s.add_development_dependency('rspec', '~> 2.3.0')
-  s.add_development_dependency('aruba', '~> 0.2.7')
+  s.add_development_dependency('aruba', '~> 0.3.2')
 
   s.post_install_message = %{
   Thanks for installing strftime. You can use these methods to

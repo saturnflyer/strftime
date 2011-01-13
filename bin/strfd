@@ -9,30 +9,7 @@ require File.expand_path(File.dirname(__FILE__) + '/../lib/strftime.rb')
 given_date = ARGV[0]
 
 if given_date
-  test_date = given_date.dup
-  possible_instructions = []
-  # long month names
-  months = Date::MONTHNAMES.compact
-  month_regexp = Regexp.new('('<<months.join('|')<<')')
-  test_date.gsub!(month_regexp,'%B')
-  # time zone offset 
-  test_date.gsub!(/\+\d{4}/,'%z')
-  # 4 digit year
-  test_date.gsub!(/\d{4}/,'%Y')
-  # 2 digit options
-  two_digit_directives = Strftime::Directive.all.select{|d| d.example.match(/^\d{2}$/)}
-  test_date.scan(/\d\d/).each do |found|
-    two_digit_directives.each do |directive|
-      possible_instructions << test_date.sub(Regexp.new(found),directive.key)
-    end
-  end
-  possible_instructions << test_date if possible_instructions.empty?
-  
-  possible_instructions.map!{|i| %{#{i} #=> #{Time.now.strftime(i)}}}
-  
-  STDOUT.puts 'Using the current time as the formatting date:'
-  STDOUT.puts possible_instructions.join('
-')
+  STDOUT.puts Strftime::InstructionSet.new(given_date).to_s
 else
   STDOUT.puts Strftime::Directive.all.sort
 end

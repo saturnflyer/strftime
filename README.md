@@ -1,5 +1,7 @@
 # strftime
 
+It's pronounced "strftime", not "strftime".
+
 With strftime you'll have descriptions of time format directives at your fingertips in Ruby.
 
 `Strftime::Directive.all` contains an array of these directive objects
