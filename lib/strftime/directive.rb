@@ -13,6 +13,7 @@ module Strftime
       self.description = options[:description]
       self.example = options[:example]
       self.matcher = options[:matcher]
+      self.related = options[:related]
       self.class.all << self
       self
     end
