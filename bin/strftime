@@ -1,8 +1,0 @@
-#!/usr/bin/env ruby
-
-require File.expand_path(File.dirname(__FILE__) + '/../lib/strftime.rb')
-
-# Allow the user to do time formatting in the command line
-# striftime '%m %d %y' => output the current date/time in the given format
-
-STDOUT.puts 'still working on striftime'
