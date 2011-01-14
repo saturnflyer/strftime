@@ -1,3 +1,3 @@
 module Strftime
-  VERSION = "2.0.0.unrelased"
+  VERSION = "2.0.0.alpha"
 end
