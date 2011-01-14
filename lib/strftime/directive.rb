@@ -222,12 +222,12 @@ module Strftime
       '%Y' => {:description => %{Year with century, zero-padded to four digits and with a minus sign prepended for dates BCE}, 
                 :example => %{2005},
                 :matcher => /-?\d{4}/,
-                :related => %w{}},
+                :related => %w{%y}},
                 
       '%y' => {:description => %{Year without century, zero-padded to two digits}, 
                 :example => %{05},
                 :matcher => /\A\d{2}\Z/,
-                :related => %w{}},
+                :related => %w{%Y}},
                 
       '%Z' => {:description => %{The timezone abbreviation (Time) or GMT offset (Date). Date will use "Z" instead of "+0000" if a time is in GMT}, 
                 :example => %{"GMT" for Time, "Z" for Date},
