@@ -1,0 +1,1 @@
+default: --format progress -r features/support/env.rb -r features/step_definitions features
