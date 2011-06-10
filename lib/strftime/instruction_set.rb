@@ -1,10 +1,9 @@
 module Strftime
   class InstructionSet
     include Strftime::DirectiveMatchers
-    attr_reader :example
-    attr_writer :example
-    attr_reader :instructions
-    attr_writer :instructions
+    attr_accessor :example
+    attr_accessor :instructions
+    
     def initialize(given)
       self.example = given
       self.instructions = []
