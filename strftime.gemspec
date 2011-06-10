@@ -12,9 +12,10 @@ Gem::Specification.new do |s|
   s.summary     = %q{Convenient list of strftime format directives}
   s.description = %q{Convenient list of strftime format directives}
 
-  s.files         = `git ls-files`.split("\n")
-  s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
-  s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
+  ignores         = File.read('.gitignore').split("\n").inject([]) {|a,p| a + Dir[p] }
+  s.files         = Dir['**/*','.gitignore'] - ignores
+  s.test_files    = Dir['spec/**/*','features/**/*','.gitignore'] - ignores
+  s.executables   = Dir['bin/*'].map{ |f| File.basename(f) }
   s.require_paths = ["lib"]
 
   s.add_development_dependency('rspec', '~> 2.3.0')
