@@ -34,5 +34,7 @@ Gem::Specification.new do |s|
 
   strfd                                  #=> shorthand to get directives
   strfd('%y')                            #=> shorthand to get details
+  strfd('April 29 2011')                 #=> a list of options for 
+                                         #   directives to match that date
   }
 end
