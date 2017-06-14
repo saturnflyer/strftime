@@ -4,36 +4,35 @@ describe Strftime::Directive do
   context '.matching' do
     it 'should return all Directives that match the given string' do
       Strftime::Directive.all = Strftime::Directive.default_collection
-      debugger
-      Strftime::Directive.matching('+1234').length.should == 1
+      expect(Strftime::Directive.matching('+1234').length).to eql(1)
     end
   end
   context '.initialize' do
     it 'should require a key' do
-      lambda{ Strftime::Directive.new }.should raise_error
+      expect{ Strftime::Directive.new }.to raise_error(ArgumentError)
     end
     it 'should set the first argument to the key' do
       d = Strftime::Directive.new('%A')
-      d.key.should == '%A'
+      expect(d.key).to eql('%A')
     end
     it 'should set the description from the given :description' do
       d = Strftime::Directive.new('%B', :description => 'B directive')
-      d.description.should == 'B directive'
+      expect(d.description).to eql('B directive')
     end
     it 'should set the example from the given :example' do
       d = Strftime::Directive.new('%C', :example => 'some format display')
-      d.example.should == 'some format display'
+      expect(d.example).to eql('some format display')
     end
     it "should set the matcher to a regular expression which matches it's replaceable text" do
       d = Strftime::Directive.new('%D', :matcher => /ZOMG/)
-      d.matcher.should == /ZOMG/
+      expect(d.matcher).to eql(/ZOMG/)
     end
   end
   context '.all=' do
     it 'should set the collection of Strftime::Directive objects' do
-      Strftime::Directive.all.size.should be > 0
+      expect(Strftime::Directive.all.size).to be > 0
       Strftime::Directive.all = []
-      Strftime::Directive.all.size.should == 0
+      expect(Strftime::Directive.all.size).to eql(0)
     end
   end
   context '.all' do
@@ -41,7 +40,7 @@ describe Strftime::Directive do
       directives = []
       Strftime::Directive.all = []
       directives << Strftime::Directive.new('%ZZ')
-      Strftime::Directive.all.should =~ directives
+      expect(Strftime::Directive.all).to match(directives)
     end
   end
   context '.default_collection' do
@@ -49,27 +48,27 @@ describe Strftime::Directive do
       defaults = Strftime::Directive.default_collection
     end
     it 'should not be settable' do
-      lambda{ Strftime::Directive.default_collection = [] }.should raise_error(NoMethodError)
+      expect(lambda{ Strftime::Directive.default_collection = [] }).to raise_error(NoMethodError)
     end
   end
   context '.[]' do
     it 'should return a Directive with the key of the given argument' do
       q = Strftime::Directive.new('%q')
-      Strftime::Directive['%q'].should == q
+      expect(Strftime::Directive['%q']).to eql(q)
     end
   end
   context '#<=>' do
     it 'should compare the key to the given directive key' do
       a = Strftime::Directive.new('%a')
       b = Strftime::Directive.new('%b')
-      (a <=> b).should == -1
+      expect((a <=> b)).to eql(-1)
     end
   end
   context '#to_s' do
     it 'should output formatted contents' do
       c = Strftime::Directive.new('%c', :description => 'Test sample.', :example => 'output something!')
-      c.to_s.should == '    %c  #=> output something!
-        Test sample.'
+      expect(c.to_s).to eql('    %c  #=> output something!
+        Test sample.')
     end
   end
 end

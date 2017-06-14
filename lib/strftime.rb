@@ -1,8 +1,9 @@
 require 'date'
-require File.dirname(__FILE__) + '/strftime/version'
-require File.dirname(__FILE__) + '/strftime/directive'
-require File.dirname(__FILE__) + '/strftime/directive_matchers'
-require File.dirname(__FILE__) + '/strftime/instruction_set'
-require File.dirname(__FILE__) + '/kernel'
+require 'strftime/version'
+require 'strftime/zones'
+require 'strftime/directive'
+require 'strftime/directive_matchers'
+require 'strftime/instruction_set'
+require 'kernel'
 module Strftime
 end
