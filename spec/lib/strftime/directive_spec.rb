@@ -61,7 +61,6 @@ describe Strftime::Directive do
   end
   describe '.default_collection' do
     it 'should return the standard collection of Strftime::Directive objects' do
-      skip
       expect(Strftime::Directive.default_collection).must_equal(Strftime::Directive.all)
     end
     it 'should not be settable' do
