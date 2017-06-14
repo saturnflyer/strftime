@@ -72,7 +72,7 @@ module Strftime
 
       '%c' => {:description => %{This prints the date and time in a way that looks like the default string representation of Time, but without the timezone. Equivalent to '%a %b %e %H:%M:%S %Y'},
                 :example => %{Sat Dec 31 13:22:33 2005},
-                :matcher => "(#{Date::ABBR_DAYNAMES.join('|')}) (#{Date::ABBR_MONTHNAMES.compact.join('|')}) [123]\\d [012]\\d:\\d{2}:\\d{2} \\d{4}",
+                :matcher => Regexp.new("(#{Date::ABBR_DAYNAMES.join('|')}) (#{Date::ABBR_MONTHNAMES.compact.join('|')}) [123]\\d [012]\\d:\\d{2}:\\d{2} \\d{4}"),
                 :related => %w{%a %b %e %H %M %S %Y}},
 
       '%D' => {:description => %{American-style short date format with two-digit year. Equivalent to "%m/%d/%y"},

@@ -20,7 +20,7 @@ describe Strftime::Directive do
   describe '.matching' do
     it 'should return all Directives that match the given string' do
       Strftime::Directive.all = Strftime::Directive.default_collection
-      expect(Strftime::Directive.matching('+1234').length).must_equal(1)
+      expect(Strftime::Directive.matching('+1234').length).must_be :>=, 1
     end
   end
   describe '.initialize' do
