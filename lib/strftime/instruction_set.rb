@@ -3,19 +3,19 @@ module Strftime
     include Strftime::DirectiveMatchers
     attr_accessor :example
     attr_accessor :instructions
-    
+
     def initialize(given)
       self.example = given
       self.instructions = []
       test_date = given.dup
-      
+
       # Single replacements
       test_date.gsub!(MONTHNAMES_REGEXP,'%B')
       test_date.gsub!(TIMEZONE_OFFSET_REGEXP,'%z')
       test_date.gsub!(FOUR_DIGIT_YEAR_REGEXP,'%Y')
-      
+
       # 2 digit options
-      two_digit_directives = Strftime::Directive.all.select{|d| 
+      two_digit_directives = Strftime::Directive.all.select{|d|
         d.example.match(/^\d{2}$/) rescue false
       }
       test_date.scan(/\d\d/).each do |found|
@@ -23,8 +23,8 @@ module Strftime
           self.instructions << test_date.sub(Regexp.new(found),directive.key)
         end
       end
-      one_character_directives = Strftime::Directive.all.select{|d| 
-        d.example.match(/^[^%\W]{1}$/) rescue false
+      one_character_directives = Strftime::Directive.all.select{|d|
+        d.example.match(/^[^\W]{1}$/) rescue false
       }
       test_date.scan(/\d/).each do |found|
         one_character_directives.each do |directive|
@@ -35,9 +35,9 @@ module Strftime
 
       self.instructions.map!{|i| %{#{i} #=> #{Time.now.strftime(i)}}}
     end
-    
+
     def to_s
-      content = 'Using the current time as the formatting date:'
+      # content = 'Using the current time as the formatting date:'
       self.instructions.join('
 ')
     end

@@ -4,6 +4,6 @@ require 'strftime/zones'
 require 'strftime/directive'
 require 'strftime/directive_matchers'
 require 'strftime/instruction_set'
-require 'kernel'
+require 'strftime/core_ext/kernel'
 module Strftime
 end

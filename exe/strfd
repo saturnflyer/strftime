@@ -1,7 +1,9 @@
 #!/usr/bin/env ruby
 
 require 'date'
-require File.expand_path(File.dirname(__FILE__) + '/../lib/strftime.rb')
+lib = File.expand_path("../../lib", __FILE__)
+$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
+require 'strftime'
 
 # If the argument appears like "%y" just output the description
 # otherwise, find the format for the given date

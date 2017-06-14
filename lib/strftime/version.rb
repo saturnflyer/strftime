@@ -1,3 +1,3 @@
 module Strftime
-  VERSION = "2.0.0.gamma"
+  VERSION = "2.0.0"
 end

@@ -8,12 +8,12 @@ module Strftime
 
     @all = []
 
-    def initialize(key, options={})
+    def initialize(key, description:, example:, matcher:, related: [])
       self.key = key
-      self.description = options[:description]
-      self.example = options[:example]
-      self.matcher = options[:matcher]
-      self.related = options[:related]
+      self.description = description
+      self.example = example
+      self.matcher = matcher
+      self.related = related
       self.class.all << self
       self
     end

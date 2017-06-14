@@ -1,27 +1,31 @@
-# -*- encoding: utf-8 -*-
-$:.push File.expand_path("../lib", __FILE__)
+# coding: utf-8
+lib = File.expand_path("../lib", __FILE__)
+$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require "strftime/version"
 
-Gem::Specification.new do |s|
-  s.name        = "strftime"
-  s.version     = Strftime::VERSION
-  s.platform    = Gem::Platform::RUBY
-  s.authors     = ["Jim Gay"]
-  s.email       = ["jim@saturnflyer.com"]
-  s.homepage    = "http://rubygems.org/gems/strftime"
-  s.summary     = %q{Convenient list of strftime format directives}
-  s.description = %q{Convenient list of strftime format directives}
+Gem::Specification.new do |spec|
+  spec.name          = "strftime"
+  spec.version       = Strftime::VERSION
+  spec.authors       = ["Jim Gay"]
+  spec.email         = ["jim@saturnflyer.com"]
 
-  ignores         = File.read('.gitignore').split("\n").inject([]) {|a,p| a + Dir[p] }
-  s.files         = Dir['**/*','.gitignore'] - ignores
-  s.test_files    = Dir['spec/**/*','features/**/*','.gitignore'] - ignores
-  s.executables   = Dir['bin/*'].map{ |f| File.basename(f) }
-  s.require_paths = ["lib"]
+  spec.summary       = %q{Convenient list of strftime format directives}
+  spec.homepage      = "https://github.com/saturnflyer/strftime"
+  spec.license       = "MIT"
 
-  s.add_development_dependency('rspec', '~> 3.6.0')
-  s.add_development_dependency('aruba', '~> 0.14.2')
+  spec.files         = `git ls-files -z`.split("\x0").reject do |f|
+    f.match(%r{^(test|spec|features)/})
+  end
+  spec.bindir        = "exe"
+  spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
+  spec.require_paths = ["lib"]
 
-  s.post_install_message = %{
+  spec.add_development_dependency "bundler", "~> 1.15"
+  spec.add_development_dependency "rake", "~> 10.0"
+  spec.add_development_dependency "minitest", "~> 5.0"
+  spec.add_development_dependency('aruba', '~> 0.14.2')
+
+  spec.post_install_message = %{
   Thanks for installing strftime. You can use these methods to
   better understand the formats used in Date and Time strftime
 

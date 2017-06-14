@@ -1,73 +1,90 @@
 require 'spec_helper'
 
 describe Strftime::Directive do
-  context '.matching' do
+  before do
+    $original = Strftime::Directive.all
+  end
+
+  after do
+    Strftime::Directive.all = $original
+  end
+
+  def new_directive(key, description: key, example: key, matcher: nil)
+    Strftime::Directive.new(key,
+      description: description,
+      example: example,
+      matcher: matcher || Regexp.new(key)
+    )
+  end
+
+  describe '.matching' do
     it 'should return all Directives that match the given string' do
       Strftime::Directive.all = Strftime::Directive.default_collection
-      expect(Strftime::Directive.matching('+1234').length).to eql(1)
+      expect(Strftime::Directive.matching('+1234').length).must_equal(1)
     end
   end
-  context '.initialize' do
+  describe '.initialize' do
     it 'should require a key' do
-      expect{ Strftime::Directive.new }.to raise_error(ArgumentError)
+      expect{ new_directive }.must_raise(ArgumentError)
     end
     it 'should set the first argument to the key' do
-      d = Strftime::Directive.new('%A')
-      expect(d.key).to eql('%A')
+      d = new_directive('%A')
+      expect(d.key).must_equal('%A')
     end
     it 'should set the description from the given :description' do
-      d = Strftime::Directive.new('%B', :description => 'B directive')
-      expect(d.description).to eql('B directive')
+      d = new_directive('%B', description: 'B directive')
+      expect(d.description).must_equal('B directive')
     end
     it 'should set the example from the given :example' do
-      d = Strftime::Directive.new('%C', :example => 'some format display')
-      expect(d.example).to eql('some format display')
+      d = new_directive('%C', example: 'some format display')
+      expect(d.example).must_equal('some format display')
     end
     it "should set the matcher to a regular expression which matches it's replaceable text" do
-      d = Strftime::Directive.new('%D', :matcher => /ZOMG/)
-      expect(d.matcher).to eql(/ZOMG/)
+      d = new_directive('%D', matcher: /ZOMG/)
+      expect(d.matcher).must_equal(/ZOMG/)
     end
   end
-  context '.all=' do
+  describe '.all=' do
     it 'should set the collection of Strftime::Directive objects' do
-      expect(Strftime::Directive.all.size).to be > 0
+      expect(Strftime::Directive.all.size).must_be :>, 0
       Strftime::Directive.all = []
-      expect(Strftime::Directive.all.size).to eql(0)
+      expect(Strftime::Directive.all.size).must_equal(0)
     end
   end
-  context '.all' do
+  describe '.all' do
     it 'should return a collection of all Strftime::Directive objects' do
       directives = []
       Strftime::Directive.all = []
-      directives << Strftime::Directive.new('%ZZ')
-      expect(Strftime::Directive.all).to match(directives)
+      directives << new_directive('%ZZ')
+      expect(Strftime::Directive.all).must_equal(directives)
     end
   end
-  context '.default_collection' do
+  describe '.default_collection' do
     it 'should return the standard collection of Strftime::Directive objects' do
-      defaults = Strftime::Directive.default_collection
+      skip
+      expect(Strftime::Directive.default_collection).must_equal(Strftime::Directive.all)
     end
     it 'should not be settable' do
-      expect(lambda{ Strftime::Directive.default_collection = [] }).to raise_error(NoMethodError)
+      expect{ Strftime::Directive.default_collection = [] }.must_raise(NoMethodError)
     end
   end
-  context '.[]' do
+  describe '.[]' do
     it 'should return a Directive with the key of the given argument' do
-      q = Strftime::Directive.new('%q')
-      expect(Strftime::Directive['%q']).to eql(q)
+      q = new_directive('%q')
+      expect(Strftime::Directive['%q']).must_equal(q)
     end
   end
-  context '#<=>' do
+  describe '#<=>' do
     it 'should compare the key to the given directive key' do
-      a = Strftime::Directive.new('%a')
-      b = Strftime::Directive.new('%b')
-      expect((a <=> b)).to eql(-1)
+      a = new_directive('%a')
+      b = new_directive('%b')
+      expect((a <=> b)).must_equal(-1)
     end
   end
-  context '#to_s' do
+  describe '#to_s' do
     it 'should output formatted contents' do
-      c = Strftime::Directive.new('%c', :description => 'Test sample.', :example => 'output something!')
-      expect(c.to_s).to eql('    %c  #=> output something!
+      c = new_directive('%c', description: 'Test sample.', example: 'output something!')
+      expect(c.to_s).must_equal('    %c  #=> output something!
         Test sample.')
     end
   end
