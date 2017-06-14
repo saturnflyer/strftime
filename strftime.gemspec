@@ -18,8 +18,8 @@ Gem::Specification.new do |s|
   s.executables   = Dir['bin/*'].map{ |f| File.basename(f) }
   s.require_paths = ["lib"]
 
-  s.add_development_dependency('rspec', '~> 2.3.0')
-  s.add_development_dependency('aruba', '~> 0.3.2')
+  s.add_development_dependency('rspec', '~> 3.6.0')
+  s.add_development_dependency('aruba', '~> 0.14.2')
 
   s.post_install_message = %{
   Thanks for installing strftime. You can use these methods to
@@ -34,7 +34,7 @@ Gem::Specification.new do |s|
 
   strfd                                  #=> shorthand to get directives
   strfd('%y')                            #=> shorthand to get details
-  strfd('April 29 2011')                 #=> a list of options for 
+  strfd('April 29 2011')                 #=> a list of options for
                                          #   directives to match that date
   }
 end
