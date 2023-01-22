@@ -260,7 +260,7 @@ module Strftime
                 :matcher => Regexp.new("#{Regexp.union(Date::ABBR_DAYNAMES)}\ #{Regexp.union(Date::ABBR_MONTHNAMES.compact)}\ [123]?\\d\ [012]\\d:\\d{2}:\\d{2}\ #{Regexp.new(Regexp.union(@zones).source,true).source}\\d{4}"),
                 :related => %w{%a %b %e %H %M %S %Z %Y}}
     }.each do |k,v|
-      Strftime::Directive.new(k, v)
+      Strftime::Directive.new(k, **v)
     end
     @default_collection = all
   end
