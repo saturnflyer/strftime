@@ -23,8 +23,10 @@ module Strftime
     end
 
     def to_s
-%{    #{key}  #=> #{example}
-        #{description}}
+      <<~DOC
+        #{key}  #=> #{example}
+          #{description}
+      DOC
     end
 
     class << self

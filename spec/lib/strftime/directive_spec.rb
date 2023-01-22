@@ -83,8 +83,10 @@ describe Strftime::Directive do
   describe '#to_s' do
     it 'should output formatted contents' do
       c = new_directive('%c', description: 'Test sample.', example: 'output something!')
-      expect(c.to_s).must_equal('    %c  #=> output something!
-        Test sample.')
+      expect(c.to_s).must_equal(<<~OUT)
+         %c  #=> output something!
+           Test sample.
+      OUT
     end
   end
 end
